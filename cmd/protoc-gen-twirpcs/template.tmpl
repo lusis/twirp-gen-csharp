@@ -6,7 +6,8 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Google.Protobuf; // For ".ToByteArray()"
 
-public class GeneratedAPI {
+namespace {$.Namespace};
+public class {$.ClassName} {
   public static readonly MediaTypeWithQualityHeaderValue CONTENT_TYPE_PROTOBUF = new MediaTypeWithQualityHeaderValue("application/protobuf");
 
   public enum ErrorCode {
@@ -20,10 +21,10 @@ public class GeneratedAPI {
     public Exception(ErrorCode type, string message) : base(message) { Type = type; }
   }
 
-  private static GeneratedAPI.Exception createException(string jsonData) {
+  private static {$.ClassName}.Exception createException(string jsonData) {
     var codeStr = parseJSONString(jsonData, "code");
     if (codeStr == null) {
-      return new GeneratedAPI.Exception(ErrorCode.Unknown, jsonData);
+      return new {$.ClassName}.Exception(ErrorCode.Unknown, jsonData);
     }
 
     ErrorCode errorCode = ErrorCode.Unknown;
@@ -32,7 +33,7 @@ public class GeneratedAPI {
     if (msg == null) {
       msg = jsonData;
     }
-    return new GeneratedAPI.Exception(errorCode, msg);
+    return new {$.ClassName}.Exception(errorCode, msg);
   }
 
   private static string parseJSONString(string jsonData, string key) {

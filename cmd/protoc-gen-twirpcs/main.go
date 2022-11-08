@@ -23,6 +23,8 @@ func main() {
 	// Set up our flags. The only one we care about for now is the server path prefix.
 	var flags flag.FlagSet
 	prefix := flags.String("pathPrefix", "/twirp", "the server path prefix to use, if modified from the Twirp default")
+	namespace := flags.String("namespace", "Twirp.Internal", "the namespace for the generated code")
+	classname := flags.String("classname", "GeneratedAPI", "alternate class name for generated code")
 
 	// No special options for this generator
 	opts := protogen.Options{ParamFunc: flags.Set}
@@ -40,6 +42,8 @@ func main() {
 		in := jsData{
 			Files:      plugin.Files,
 			PathPrefix: *prefix,
+			Namespace:  *namespace,
+			ClassName:  *classname,
 		}
 
 		return template.Execute(out, in)
@@ -49,6 +53,8 @@ func main() {
 type jsData struct {
 	Files      []*protogen.File
 	PathPrefix string
+	Namespace  string
+	ClassName  string
 }
 
 // tabNewlines adds tabs (as two spaces) to the beginning of each line in the input string.
